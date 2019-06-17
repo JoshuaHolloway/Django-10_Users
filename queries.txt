@@ -1,0 +1,37 @@
+> python manage.py shell
+
+>>> from apps.users_app.models import *
+=============================================================================================================================================================================
+// Query: Create 3 new users:
+>>> newly_created_user = Users.objects.create(first_name="josh", last_name="holloway", email="jhollow6@asu.edu", age=99)
+>>> newly_created_user = Users.objects.create(first_name="steve", last_name="wozniak", email="steve@apple.com",  age=99)
+>>> newly_created_user = Users.objects.create(first_name="sergey", last_name="brin", email="sergey@google.com",  age=99)
+=============================================================================================================================================================================
+// Query: Retrieve all the users
+>>> Users.objects.all().values()
+	<QuerySet [{'id': 1, 'first_name': 'josh', 'last_name': 'holloway', 'email': 'jhollow6@asu.edu', 'age': 48, 'created_at': datetime.datetime(2019, 6, 16, 22, 10, 34,
+	 827795, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 6, 16, 22, 10, 34, 827795, tzinfo=<UTC>)}]>
+
+In models.py:
+    def __repr__(self):
+        return f"Users: ({self.first_name}, {self.last_name}, {self.email}, {self.age})"
+
+>>> Users.objects.get(id=1)
+=============================================================================================================================================================================
+// Query: Retrieve the last user
+>>> last_user = Users.objects.last()
+=============================================================================================================================================================================
+// Query: Retrieve the first user
+>>> first_user = Users.objects.first()
+=============================================================================================================================================================================
+// Query: Change the user with id=3 so their last name is Pancakes.
+>>> user = Users.objects.get(id=1)
+>>> user.first_name = "mark"
+>>> user.last_name = "zuckerberg"
+>>> user.email = "mark@facebook.com"
+>>> user.save()	# make sure all changes to the existing record get saved to the database
+=============================================================================================================================================================================
+// Query: Delete the user with id=2 from the database
+=============================================================================================================================================================================
+// Query: Get all the users, sorted by their first name
+=============================================================================================================================================================================
